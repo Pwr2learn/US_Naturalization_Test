@@ -1,0 +1,156 @@
+[
+  {
+    "ID": 1,
+    "Question": "What is the supreme law of the land?",
+    "Accepted_Answers": ["The Constitution"],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 2,
+    "Question": "What does the Constitution do?",
+    "Accepted_Answers": [
+      "Sets up the government",
+      "Defines the government",
+      "Protects basic rights of Americans"
+    ],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 3,
+    "Question": "The idea of self-government is in the first three words of the Constitution. What are these words?",
+    "Accepted_Answers": ["We the People"],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 6,
+    "Question": "What is one right or freedom from the First Amendment?",
+    "Accepted_Answers": [
+      "Speech",
+      "Religion",
+      "Assembly",
+      "Press",
+      "Petition the government"
+    ],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 13,
+    "Question": "Name one branch or part of the government.",
+    "Accepted_Answers": [
+      "Congress",
+      "Legislative",
+      "President",
+      "Executive",
+      "The courts",
+      "Judicial"
+    ],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 15,
+    "Question": "Who is in charge of the executive branch?",
+    "Accepted_Answers": ["The President"],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 17,
+    "Question": "What are the two parts of the U.S. Congress?",
+    "Accepted_Answers": ["The Senate and House of Representatives"],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 20,
+    "Question": "Who is one of your state's U.S. Senators now?",
+    "Accepted_Answers": ["Answers will vary."],
+    "Dynamic_Answer": true
+  },
+  {
+    "ID": 23,
+    "Question": "Name your U.S. Representative.",
+    "Accepted_Answers": ["Answers will vary."],
+    "Dynamic_Answer": true
+  },
+  {
+    "ID": 27,
+    "Question": "In what month do we vote for President?",
+    "Accepted_Answers": ["November"],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 28,
+    "Question": "What is the name of the President of the United States now?",
+    "Accepted_Answers": ["Answers will vary."],
+    "Dynamic_Answer": true
+  },
+  {
+    "ID": 29,
+    "Question": "What is the name of the Vice President of the United States now?",
+    "Accepted_Answers": ["Answers will vary."],
+    "Dynamic_Answer": true
+  },
+  {
+    "ID": 43,
+    "Question": "Who is the Governor of your state now?",
+    "Accepted_Answers": ["Answers will vary."],
+    "Dynamic_Answer": true
+  },
+  {
+    "ID": 46,
+    "Question": "What is the political party of the President now?",
+    "Accepted_Answers": ["Answers will vary."],
+    "Dynamic_Answer": true
+  },
+  {
+    "ID": 47,
+    "Question": "What is the name of the Speaker of the House of Representatives now?",
+    "Accepted_Answers": ["Answers will vary."],
+    "Dynamic_Answer": true
+  },
+  {
+    "ID": 54,
+    "Question": "How old do citizens have to be to vote for President?",
+    "Accepted_Answers": ["Eighteen (18) and older"],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 70,
+    "Question": "Who was the first President?",
+    "Accepted_Answers": ["(George) Washington"],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 85,
+    "Question": "What did Martin Luther King, Jr. do?",
+    "Accepted_Answers": [
+      "Fought for civil rights",
+      "Worked for equality for all Americans"
+    ],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 96,
+    "Question": "Why does the flag have 13 stripes?",
+    "Accepted_Answers": [
+      "Because there were 13 original colonies",
+      "Because the stripes represent the original colonies"
+    ],
+    "Dynamic_Answer": false
+  },
+  {
+    "ID": 100,
+    "Question": "Name two national U.S. holidays.",
+    "Accepted_Answers": [
+      "New Year's Day",
+      "Martin Luther King, Jr. Day",
+      "Presidents' Day",
+      "Memorial Day",
+      "Independence Day",
+      "Labor Day",
+      "Columbus Day",
+      "Veterans Day",
+      "Thanksgiving",
+      "Christmas"
+    ],
+    "Dynamic_Answer": false
+  }
+]

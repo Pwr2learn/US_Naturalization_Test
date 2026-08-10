@@ -1,0 +1,59 @@
+.cardContainer {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 500px;
+  min-height: 250px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  min-height: 250px;
+}
+
+.isFlipped {
+  transform: rotateY(180deg);
+}
+
+.cardFace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 2px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.cardBack {
+  transform: rotateY(180deg);
+  border-color: var(--primary-color);
+  background-color: #f8fafc;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.flipHint {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+}
