@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import styles from '../study.module.css';
 
 export default function InterviewGuide() {
   const commands = [
@@ -12,49 +13,104 @@ export default function InterviewGuide() {
   ];
 
   return (
-    <div style={{ padding: '1rem', maxWidth: '800px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '2rem' }}>
-        <Link href="/" style={{ color: 'var(--primary-color)', textDecoration: 'underline' }}>
-          &larr; Back to Home
-        </Link>
-      </div>
+    <div className={styles.page}>
+      <section className={styles.hero}>
+        <span className={styles.eyebrow}>N-400 interview</span>
+        <h1>Get familiar with the interview before the real appointment.</h1>
+        <p>
+          The speaking test happens throughout the interview. That means confidence comes from
+          understanding the officer’s instructions and being ready for common personal questions.
+        </p>
 
-      <h2 style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>N-400 Interview Guide</h2>
-      <p style={{ marginBottom: '2rem', color: 'var(--text-secondary)' }}>
-        The speaking test takes place during your N-400 interview. The officer will verify your application and ask questions about your background.
-      </p>
+        <div className={styles.ctaRow}>
+          <Link href="/civics-test" className="button-secondary">
+            Practice civics first
+          </Link>
+          <Link href="/" className="button-ghost">
+            Back to home
+          </Link>
+        </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-        <section style={{ background: 'white', padding: '2rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
-          <h3 style={{ color: 'var(--secondary-color)', marginBottom: '1rem' }}>Common Officer Commands</h3>
-          <p style={{ marginBottom: '1rem' }}>You must understand and follow these instructions in English:</p>
-          <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <div className={styles.heroMeta}>
+          <div className={styles.metaCard}>
+            <strong>What the officer checks</strong>
+            <span>Can she understand the questions and answer in basic English?</span>
+          </div>
+          <div className={styles.metaCard}>
+            <strong>What helps most</strong>
+            <span>Practicing the same command phrases until they feel familiar</span>
+          </div>
+          <div className={styles.metaCard}>
+            <strong>Best mindset</strong>
+            <span>Stay calm, answer clearly, and ask for repetition if needed</span>
+          </div>
+        </div>
+      </section>
+
+      <div className={styles.splitGrid}>
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h3>Common officer commands</h3>
+            <p>These are worth practicing out loud until they feel normal.</p>
+          </div>
+
+          <ul className={styles.list}>
             {commands.map((c, i) => (
-              <li key={i} style={{ padding: '0.75rem 1rem', background: '#f8fafc', borderLeft: '4px solid var(--primary-color)' }}>
+              <li key={i} className={styles.listItem}>
                 {c}
               </li>
             ))}
           </ul>
         </section>
 
-        <section style={{ background: 'white', padding: '2rem', borderRadius: '12px', border: '1px solid var(--border)' }}>
-          <h3 style={{ color: 'var(--secondary-color)', marginBottom: '1rem' }}>Interview Topics</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div>
-              <strong>1. Personal Information</strong>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Verify your name, address, employment, and travel history.</p>
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h3>Main interview topics</h3>
+            <p>Most interview questions fall into a small number of categories.</p>
+          </div>
+
+          <div className={styles.list}>
+            <div className={styles.topicBlock}>
+              <strong>Personal information</strong>
+              <p>Name, address, family, work, travel history, and key details from the N-400.</p>
             </div>
-            <div>
-              <strong>2. Good Moral Character (&quot;Have you ever...&quot;)</strong>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Questions about taxes, memberships, and criminal history.</p>
+            <div className={styles.topicBlock}>
+              <strong>Good moral character</strong>
+              <p>Questions about taxes, arrests, organizations, and past legal issues.</p>
             </div>
-            <div>
-              <strong>3. Oath of Allegiance</strong>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Willingness to support the Constitution and bear arms for the U.S.</p>
+            <div className={styles.topicBlock}>
+              <strong>Oath of allegiance</strong>
+              <p>Whether she is willing to support the Constitution and complete the oath process.</p>
             </div>
           </div>
         </section>
       </div>
+
+      <section className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h3>How to practice at home</h3>
+          <p>Keep it conversational. The point is to make the format feel familiar.</p>
+        </div>
+
+        <div className={styles.splitGrid}>
+          <div className={styles.topicBlock}>
+            <strong>Step 1</strong>
+            <p>Read one officer command out loud and have her respond physically or verbally.</p>
+          </div>
+          <div className={styles.topicBlock}>
+            <strong>Step 2</strong>
+            <p>Ask simple personal questions from the application and let her answer in her own words.</p>
+          </div>
+          <div className={styles.topicBlock}>
+            <strong>Step 3</strong>
+            <p>Repeat the hardest questions once more, then stop before it becomes tiring.</p>
+          </div>
+          <div className={styles.topicBlock}>
+            <strong>Important reminder</strong>
+            <p>She does not need perfect English. She needs to understand and respond clearly enough.</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

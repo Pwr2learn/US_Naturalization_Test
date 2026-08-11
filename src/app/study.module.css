@@ -1,0 +1,142 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero {
+  display: grid;
+  gap: 1.25rem;
+  padding: 2rem;
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at top right, rgba(177, 197, 173, 0.3), transparent 30%),
+    linear-gradient(180deg, rgba(253, 250, 243, 0.95), rgba(255, 255, 255, 0.98));
+  border: 1px solid rgba(67, 84, 63, 0.14);
+  box-shadow: 0 24px 60px rgba(26, 37, 30, 0.08);
+}
+
+.eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(67, 84, 63, 0.08);
+  color: var(--forest-700);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.hero h2 {
+  max-width: 14ch;
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--ink-900);
+}
+
+.hero p {
+  max-width: 65ch;
+  color: var(--ink-700);
+  font-size: 1.05rem;
+}
+
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.metaCard {
+  min-width: 180px;
+  flex: 1;
+  padding: 1rem 1.1rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(67, 84, 63, 0.12);
+}
+
+.metaCard strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: var(--ink-900);
+}
+
+.metaCard span {
+  color: var(--ink-600);
+  font-size: 0.95rem;
+}
+
+.section {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: var(--surface);
+  border: 1px solid rgba(67, 84, 63, 0.1);
+  box-shadow: 0 18px 45px rgba(26, 37, 30, 0.06);
+}
+
+.sectionHeader {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.sectionHeader h3 {
+  font-size: 1.35rem;
+  color: var(--ink-900);
+}
+
+.sectionHeader p {
+  color: var(--ink-600);
+}
+
+.list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.listItem {
+  padding: 1rem 1.1rem;
+  border-radius: 1rem;
+  background: var(--sand-100);
+  border: 1px solid rgba(67, 84, 63, 0.08);
+  color: var(--ink-800);
+}
+
+.splitGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.topicBlock {
+  padding: 1rem 1.1rem;
+  border-left: 3px solid var(--forest-500);
+  background: rgba(177, 197, 173, 0.12);
+  border-radius: 0 1rem 1rem 0;
+}
+
+.topicBlock strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--ink-900);
+}
+
+.topicBlock p {
+  color: var(--ink-600);
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .splitGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,12 +1,21 @@
 :root {
-  --primary-color: #0033a0; /* Patriotic Blue */
-  --secondary-color: #e31837; /* Patriotic Red */
-  --background: #f8f9fa;
-  --surface: #ffffff;
-  --text-primary: #1a1a1a;
-  --text-secondary: #666666;
-  --border: #e2e8f0;
-  --radius: 12px;
+  --forest-900: #1a251e;
+  --forest-700: #43543f;
+  --forest-500: #6f8568;
+  --sage-300: #b1c5ad;
+  --sand-100: #f5efe4;
+  --surface: #fffdf9;
+  --background: #f4f1ea;
+  --ink-900: #152018;
+  --ink-800: #273228;
+  --ink-700: #4a584b;
+  --ink-600: #667467;
+  --border: #dde3d8;
+  --primary-color: #43543f;
+  --secondary-color: #a56446;
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-600);
+  --radius: 24px;
 }
 
 * {
@@ -15,8 +24,14 @@
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: var(--background);
+  background:
+    radial-gradient(circle at top left, rgba(177, 197, 173, 0.22), transparent 24%),
+    linear-gradient(180deg, #f7f4ed 0%, #f1ede3 100%);
   color: var(--text-primary);
   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.5;
@@ -27,22 +42,152 @@ a {
   text-decoration: none;
 }
 
-.app-header {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 1rem 2rem;
-  text-align: center;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+.site-shell {
+  min-height: 100vh;
 }
 
-.app-header h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: -0.5px;
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: 1rem;
+  backdrop-filter: blur(14px);
+  background: rgba(247, 244, 237, 0.82);
+  border-bottom: 1px solid rgba(67, 84, 63, 0.08);
+}
+
+.app-header__inner {
+  width: min(1180px, calc(100% - 1rem));
+  margin: 0 auto;
+  padding: 0.95rem 1.1rem;
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.8);
+  border: 1px solid rgba(67, 84, 63, 0.1);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 18px 45px rgba(26, 37, 30, 0.08);
 }
 
 .app-main {
-  max-width: 800px;
+  width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 2rem 0 3rem;
+}
+
+.brand-mark {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.brand-mark__eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--forest-700);
+  font-weight: 700;
+}
+
+.brand-mark__name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.app-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.9rem;
+}
+
+.app-nav a {
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  color: var(--ink-700);
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.app-nav a:hover,
+.app-nav a:focus-visible {
+  background: rgba(67, 84, 63, 0.09);
+  color: var(--ink-900);
+  outline: none;
+}
+
+.app-footer {
+  padding: 0 1rem 2rem;
+}
+
+.app-footer__inner {
+  width: min(1180px, calc(100% - 1rem));
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 253, 249, 0.88);
+  border: 1px solid rgba(67, 84, 63, 0.09);
+  color: var(--ink-700);
+}
+
+.app-footer__note {
+  margin-top: 0.35rem;
+  color: var(--ink-600);
+  font-size: 0.95rem;
+}
+
+.button-primary,
+.button-secondary,
+.button-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.85rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.button-primary {
+  background: var(--forest-900);
+  color: #fff;
+  box-shadow: 0 16px 30px rgba(26, 37, 30, 0.18);
+}
+
+.button-primary:hover,
+.button-secondary:hover,
+.button-ghost:hover {
+  transform: translateY(-1px);
+}
+
+.button-secondary {
+  background: rgba(177, 197, 173, 0.22);
+  color: var(--ink-900);
+  border-color: rgba(67, 84, 63, 0.12);
+}
+
+.button-ghost {
+  color: var(--ink-800);
+  border-color: rgba(67, 84, 63, 0.12);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 820px) {
+  .app-header {
+    padding: 0.75rem;
+  }
+
+  .app-header__inner {
+    border-radius: 1.5rem;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .app-nav {
+    justify-content: flex-start;
+  }
 }

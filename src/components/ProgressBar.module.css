@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .labels {
@@ -9,20 +9,20 @@
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--ink-600);
 }
 
 .barBackground {
   width: 100%;
-  height: 8px;
-  background-color: var(--border);
-  border-radius: 4px;
+  height: 10px;
+  background-color: rgba(67, 84, 63, 0.12);
+  border-radius: 999px;
   overflow: hidden;
 }
 
 .barFill {
   height: 100%;
-  background-color: var(--primary-color);
-  border-radius: 4px;
+  background: linear-gradient(90deg, var(--forest-500), var(--forest-900));
+  border-radius: 999px;
   transition: width 0.3s ease;
 }
