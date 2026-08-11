@@ -21,34 +21,32 @@ export default function ReadingWriting() {
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
-        <span className={styles.eyebrow}>Reading & writing</span>
-        <h1>Practice the English portion in a simple, repeatable way.</h1>
-        <p>
-          For this part of the test, she only needs to read one sentence correctly and write one
-          sentence correctly. The goal is calm repetition, not memorizing everything at once.
-        </p>
+        <span className={styles.eyebrow}>Read and write</span>
+        <h1>Read one sentence. Write one sentence.</h1>
+        <p className={styles.translation}>Lea una oración. Escriba una oración.</p>
+        <p>This part is short. Go slowly.</p>
 
         <div className={styles.ctaRow}>
           <Link href="/civics-test" className="button-secondary">
-            Start with civics
+            Civics
           </Link>
           <Link href="/" className="button-ghost">
-            Back to home
+            Home
           </Link>
         </div>
 
         <div className={styles.heroMeta}>
           <div className={styles.metaCard}>
-            <strong>Passing rule</strong>
-            <span>1 correct reading sentence out of up to 3 attempts</span>
+            <strong>Read</strong>
+            <span>Read 1 sentence correctly</span>
           </div>
           <div className={styles.metaCard}>
-            <strong>Writing rule</strong>
-            <span>1 correct writing sentence out of up to 3 attempts</span>
+            <strong>Write</strong>
+            <span>Write 1 sentence correctly</span>
           </div>
           <div className={styles.metaCard}>
-            <strong>Best approach</strong>
-            <span>Read out loud slowly, then copy one sentence by hand</span>
+            <strong>Tip</strong>
+            <span>Say it slowly. Then write it slowly.</span>
           </div>
         </div>
       </section>
@@ -57,7 +55,8 @@ export default function ReadingWriting() {
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
             <h3>Reading practice</h3>
-            <p>Read these out loud clearly and slowly. Repeat the ones that feel hard.</p>
+            <p className={styles.translation}>Práctica de lectura</p>
+            <p>Read these out loud.</p>
           </div>
 
           <ul className={styles.list}>
@@ -72,7 +71,8 @@ export default function ReadingWriting() {
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
             <h3>Writing practice</h3>
-            <p>Have someone read these aloud, then write them down on paper exactly as you hear them.</p>
+            <p className={styles.translation}>Práctica de escritura</p>
+            <p>Listen and write the sentence on paper.</p>
           </div>
 
           <ul className={styles.list}>
@@ -87,26 +87,27 @@ export default function ReadingWriting() {
 
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <h3>A simple 10-minute routine</h3>
-          <p>Keep each study session short enough that it actually happens.</p>
+          <h3>Easy plan</h3>
+          <p className={styles.translation}>Plan fácil</p>
+          <p>Keep it short.</p>
         </div>
 
         <div className={styles.splitGrid}>
           <div className={styles.topicBlock}>
-            <strong>Minute 1-3</strong>
-            <p>Read two or three sentences out loud.</p>
+            <strong>Step 1</strong>
+            <p>Read 2 or 3 sentences.</p>
           </div>
           <div className={styles.topicBlock}>
-            <strong>Minute 4-7</strong>
-            <p>Write one sentence by hand, then check spelling and clarity.</p>
+            <strong>Step 2</strong>
+            <p>Write 1 sentence.</p>
           </div>
           <div className={styles.topicBlock}>
-            <strong>Minute 8-10</strong>
-            <p>Repeat the hardest sentence one more time before stopping.</p>
+            <strong>Step 3</strong>
+            <p>Repeat the hard one again.</p>
           </div>
           <div className={styles.topicBlock}>
-            <strong>What matters most</strong>
-            <p>Steady practice beats long, stressful study sessions.</p>
+            <strong>Stop</strong>
+            <p>Short practice is okay.</p>
           </div>
         </div>
       </section>

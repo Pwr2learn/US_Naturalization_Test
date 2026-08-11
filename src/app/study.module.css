@@ -9,9 +9,7 @@
   gap: 1.25rem;
   padding: 2rem;
   border-radius: 2rem;
-  background:
-    radial-gradient(circle at top right, rgba(177, 197, 173, 0.3), transparent 30%),
-    linear-gradient(180deg, rgba(253, 250, 243, 0.95), rgba(255, 255, 255, 0.98));
+  background: var(--surface);
   border: 1px solid rgba(67, 84, 63, 0.14);
   box-shadow: 0 24px 60px rgba(26, 37, 30, 0.08);
 }
@@ -44,6 +42,12 @@
   font-size: 1.05rem;
 }
 
+.translation {
+  color: var(--secondary-color);
+  font-size: 0.98rem;
+  font-weight: 700;
+}
+
 .heroMeta {
   display: flex;
   flex-wrap: wrap;
@@ -55,7 +59,7 @@
   flex: 1;
   padding: 1rem 1.1rem;
   border-radius: 1.25rem;
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--surface);
   border: 1px solid rgba(67, 84, 63, 0.12);
 }
 

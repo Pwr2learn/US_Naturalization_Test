@@ -16,6 +16,36 @@
   --text-primary: var(--ink-900);
   --text-secondary: var(--ink-600);
   --radius: 24px;
+  font-size: 18px;
+}
+
+html[data-font-size="small"] {
+  font-size: 16px;
+}
+
+html[data-font-size="medium"] {
+  font-size: 18px;
+}
+
+html[data-font-size="large"] {
+  font-size: 21px;
+}
+
+html[data-theme="dark"] {
+  --surface: #121813;
+  --background: #101410;
+  --ink-900: #f3f5ef;
+  --ink-800: #e4eadf;
+  --ink-700: #cad6c5;
+  --ink-600: #a8b6a5;
+  --border: #334034;
+  --forest-900: #eef7ec;
+  --forest-700: #c4d6c1;
+  --forest-500: #89a486;
+  --sage-300: #314033;
+  --sand-100: #1a201b;
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-600);
 }
 
 * {
@@ -35,6 +65,12 @@ body {
   color: var(--text-primary);
   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.5;
+}
+
+html[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at top left, rgba(91, 112, 88, 0.2), transparent 24%),
+    linear-gradient(180deg, #141914 0%, #0f130f 100%);
 }
 
 a {
@@ -73,7 +109,7 @@ a {
 .app-main {
   width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 2rem 0 3rem;
+  padding: 1rem 0 3rem;
 }
 
 .brand-mark {
@@ -138,6 +174,68 @@ a {
   font-size: 0.95rem;
 }
 
+.app-toolbar {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0.85rem auto 0;
+}
+
+.accessibility-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  padding: 0.9rem 1rem;
+  border-radius: 1.25rem;
+  background: rgba(255, 253, 249, 0.88);
+  border: 1px solid rgba(67, 84, 63, 0.1);
+  box-shadow: 0 14px 35px rgba(26, 37, 30, 0.06);
+}
+
+html[data-theme="dark"] .accessibility-bar,
+html[data-theme="dark"] .app-footer__inner,
+html[data-theme="dark"] .app-header__inner {
+  background: rgba(18, 24, 19, 0.9);
+}
+
+.accessibility-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.accessibility-label {
+  color: var(--ink-700);
+  font-weight: 700;
+}
+
+.accessibility-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.accessibility-buttons button {
+  min-height: 42px;
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(67, 84, 63, 0.12);
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--ink-800);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+html[data-theme="dark"] .accessibility-buttons button,
+html[data-theme="dark"] .button-ghost {
+  background: rgba(29, 36, 30, 0.88);
+}
+
+.accessibility-buttons button.active {
+  background: var(--forest-900);
+  color: var(--background);
+}
+
 .button-primary,
 .button-secondary,
 .button-ghost {
@@ -189,5 +287,10 @@ a {
 
   .app-nav {
     justify-content: flex-start;
+  }
+
+  .accessibility-bar {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import { AccessibilityControls } from "@/components/AccessibilityControls";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Civics Companion | USCIS Naturalization Study App",
+  title: "Citizenship Practice | USCIS Study App",
   description:
-    "A calm, practical study app for the civics test, English practice, and N-400 interview preparation.",
+    "Simple USCIS practice for civics, reading, writing, and interview questions.",
 };
 
 export default function RootLayout({
@@ -23,27 +24,29 @@ export default function RootLayout({
           <header className="app-header">
             <div className="app-header__inner">
               <Link href="/" className="brand-mark">
-                <span className="brand-mark__eyebrow">Study with confidence</span>
-                <span className="brand-mark__name">Civics Companion</span>
+                <span className="brand-mark__eyebrow">Simple study app</span>
+                <span className="brand-mark__name">Citizenship Practice</span>
               </Link>
 
               <nav className="app-nav" aria-label="Primary">
                 <Link href="/">Home</Link>
-                <Link href="/civics-test">Civics test</Link>
-                <Link href="/reading-writing">Reading & writing</Link>
+                <Link href="/civics-test">Civics</Link>
+                <Link href="/reading-writing">Read & write</Link>
                 <Link href="/interview">Interview</Link>
               </nav>
             </div>
           </header>
 
+          <div className="app-toolbar">
+            <AccessibilityControls />
+          </div>
+
           <main className="app-main">{children}</main>
 
           <footer className="app-footer">
             <div className="app-footer__inner">
-              <p>Civics Companion is built to make studying feel calmer, clearer, and easier to stick with.</p>
-              <p className="app-footer__note">
-                Practice content is based on the 2008 USCIS naturalization test structure.
-              </p>
+              <p>Simple practice for the USCIS test.</p>
+              <p className="app-footer__note">Content follows the 2008 USCIS naturalization test format.</p>
             </div>
           </footer>
         </div>

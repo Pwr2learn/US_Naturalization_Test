@@ -6,111 +6,111 @@ export default function Home() {
     <div className={styles.container}>
       <section className={styles.hero}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>Built for calm, steady practice</span>
-          <h1>Help your mom study with less stress and more confidence.</h1>
-          <p>
-            Civics Companion turns USCIS prep into a simple routine: practice the civics questions,
-            review English reading and writing, and get comfortable with the N-400 interview.
-          </p>
+          <span className={styles.eyebrow}>Start here</span>
+          <h1>Practice for the citizenship test.</h1>
+          <p className={styles.translation}>Practique para el examen de ciudadanía.</p>
+          <p>Pick one part. Study a little at a time. Keep it simple.</p>
 
           <div className={styles.heroActions}>
             <Link href="/civics-test" className="button-primary">
-              Start studying
+              Start civics
             </Link>
             <Link href="/reading-writing" className="button-secondary">
-              Practice English
+              Start reading
             </Link>
           </div>
 
           <div className={styles.heroStats}>
             <div>
-              <strong>3 study modes</strong>
-              <span>Civics, English practice, and interview prep</span>
+              <strong>Step 1</strong>
+              <span>Civics questions</span>
             </div>
             <div>
-              <strong>USCIS-style logic</strong>
-              <span>Practice the 6-correct-to-pass civics format</span>
+              <strong>Step 2</strong>
+              <span>Reading and writing</span>
             </div>
             <div>
-              <strong>Clear next steps</strong>
-              <span>Know what to study today instead of guessing</span>
+              <strong>Step 3</strong>
+              <span>Interview practice</span>
             </div>
           </div>
         </div>
 
         <div className={styles.heroPanel}>
           <div className={styles.heroPanelCard}>
-            <span className={styles.panelLabel}>A simple plan</span>
+            <span className={styles.panelLabel}>Today</span>
             <ol>
-              <li>Warm up with 10 civics questions</li>
+              <li>Answer 10 civics questions</li>
               <li>Read one sentence out loud</li>
-              <li>Write one sentence by hand</li>
-              <li>Review common interview questions</li>
+              <li>Write one sentence</li>
+              <li>Read a few interview questions</li>
             </ol>
           </div>
 
           <div className={styles.heroPanelQuote}>
-            <p>
-              “The goal isn’t to study everything at once. It’s to help her feel ready one step at a time.”
-            </p>
+            <p>Small steps are enough.</p>
           </div>
         </div>
       </section>
 
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <span className={styles.eyebrow}>Why this works</span>
-          <h2>A practical study tool for a real family goal.</h2>
-          <p>
-            This app is designed to reduce overwhelm. Instead of generic test prep, it focuses on the
-            exact parts of the naturalization process most people need to practice.
-          </p>
+          <span className={styles.eyebrow}>How to use it</span>
+          <h2>Choose one part and begin.</h2>
+          <p className={styles.translation}>Elija una parte y empiece.</p>
         </div>
 
         <div className={styles.valueGrid}>
           <article className={styles.valueCard}>
-            <h3>Simple enough to use every day</h3>
-            <p>Clear sections, readable screens, and a calm layout make it easier to build a routine.</p>
+            <h3>Civics</h3>
+            <p className={styles.translation}>Educación cívica</p>
+            <p>Answer the civics questions.</p>
           </article>
 
           <article className={styles.valueCard}>
-            <h3>Focused on what USCIS actually asks</h3>
-            <p>Study the civics test, reading and writing prompts, and interview topics in one place.</p>
+            <h3>Reading and writing</h3>
+            <p className={styles.translation}>Lectura y escritura</p>
+            <p>Read a sentence. Write a sentence.</p>
           </article>
 
           <article className={styles.valueCard}>
-            <h3>Built to create confidence</h3>
-            <p>Practice in a way that feels steady and manageable, especially for someone nervous about the interview.</p>
+            <h3>Interview</h3>
+            <p className={styles.translation}>Entrevista</p>
+            <p>Practice common interview questions.</p>
           </article>
         </div>
       </section>
 
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <span className={styles.eyebrow}>Study paths</span>
-          <h2>Everything she needs in one place.</h2>
+          <span className={styles.eyebrow}>Main sections</span>
+          <h2>Open the part you want.</h2>
+          <p className={styles.translation}>Abra la parte que quiere.</p>
         </div>
 
         <div className={styles.grid}>
           <Link href="/civics-test" className={styles.card}>
-            <span className={styles.cardTag}>Civics test</span>
-            <h3>Practice the official 100-question bank</h3>
-            <p>Run through USCIS-style questions and track whether she reaches the 6-correct passing mark.</p>
-            <span className={styles.cardLink}>Open civics practice</span>
+            <span className={styles.cardTag}>Civics</span>
+            <h3>Civics questions</h3>
+            <p className={styles.translation}>Preguntas de civismo</p>
+            <p>Study 10 questions at a time.</p>
+            <span className={styles.cardLink}>Open civics</span>
           </Link>
 
           <Link href="/reading-writing" className={styles.card}>
-            <span className={styles.cardTag}>Reading & writing</span>
-            <h3>Practice the English part without overcomplicating it</h3>
-            <p>Use official-style sentences and vocabulary to rehearse the read-one, write-one passing format.</p>
-            <span className={styles.cardLink}>Open English practice</span>
+            <span className={styles.cardTag}>Read & write</span>
+            <h3>Reading and writing</h3>
+            <p className={styles.translation}>Lectura y escritura</p>
+            <p>Practice short English sentences.</p>
+            <span className={styles.cardLink}>Open reading</span>
           </Link>
 
           <Link href="/interview" className={styles.card}>
             <span className={styles.cardTag}>Interview</span>
-            <h3>Get familiar with the N-400 conversation</h3>
-            <p>Review common officer commands, interview topics, and the kind of answers she should be ready to give.</p>
-            <span className={styles.cardLink}>Open interview prep</span>
+            <h3>Interview questions</h3>
+            <p className={styles.translation}>Preguntas de entrevista</p>
+            <p>Read simple interview prompts.</p>
+            <span className={styles.cardLink}>Open interview</span>
           </Link>
         </div>
       </section>
@@ -118,16 +118,17 @@ export default function Home() {
       <section className={styles.section}>
         <div className={styles.ctaPanel}>
           <div>
-            <span className={styles.eyebrow}>Start here</span>
-            <h2>Keep the first session simple.</h2>
-            <p>Start with the civics test, then move into reading and writing. The goal is momentum, not perfection.</p>
+            <span className={styles.eyebrow}>Easy start</span>
+            <h2>Start with civics.</h2>
+            <p className={styles.translation}>Empiece con civismo.</p>
+            <p>Do 10 questions. Then stop or do one more section.</p>
           </div>
           <div className={styles.heroActions}>
             <Link href="/civics-test" className="button-primary">
-              Start studying now
+              Start now
             </Link>
             <Link href="/interview" className="button-ghost">
-              Review interview topics
+              Interview
             </Link>
           </div>
         </div>

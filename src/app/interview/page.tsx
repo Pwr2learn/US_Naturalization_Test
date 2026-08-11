@@ -15,34 +15,32 @@ export default function InterviewGuide() {
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
-        <span className={styles.eyebrow}>N-400 interview</span>
-        <h1>Get familiar with the interview before the real appointment.</h1>
-        <p>
-          The speaking test happens throughout the interview. That means confidence comes from
-          understanding the officer’s instructions and being ready for common personal questions.
-        </p>
+        <span className={styles.eyebrow}>Interview</span>
+        <h1>Practice the interview questions.</h1>
+        <p className={styles.translation}>Practique las preguntas de la entrevista.</p>
+        <p>Read the question. Answer in simple English.</p>
 
         <div className={styles.ctaRow}>
           <Link href="/civics-test" className="button-secondary">
-            Practice civics first
+            Civics
           </Link>
           <Link href="/" className="button-ghost">
-            Back to home
+            Home
           </Link>
         </div>
 
         <div className={styles.heroMeta}>
           <div className={styles.metaCard}>
-            <strong>What the officer checks</strong>
-            <span>Can she understand the questions and answer in basic English?</span>
+            <strong>Goal</strong>
+            <span>Understand the question and answer clearly</span>
           </div>
           <div className={styles.metaCard}>
-            <strong>What helps most</strong>
-            <span>Practicing the same command phrases until they feel familiar</span>
+            <strong>Tip</strong>
+            <span>Short answers are okay</span>
           </div>
           <div className={styles.metaCard}>
-            <strong>Best mindset</strong>
-            <span>Stay calm, answer clearly, and ask for repetition if needed</span>
+            <strong>If needed</strong>
+            <span>Ask the officer to repeat</span>
           </div>
         </div>
       </section>
@@ -51,7 +49,8 @@ export default function InterviewGuide() {
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
             <h3>Common officer commands</h3>
-            <p>These are worth practicing out loud until they feel normal.</p>
+            <p className={styles.translation}>Comandos comunes del oficial</p>
+            <p>Practice these simple commands.</p>
           </div>
 
           <ul className={styles.list}>
@@ -66,21 +65,22 @@ export default function InterviewGuide() {
         <section className={styles.section}>
           <div className={styles.sectionHeader}>
             <h3>Main interview topics</h3>
-            <p>Most interview questions fall into a small number of categories.</p>
+            <p className={styles.translation}>Temas principales</p>
+            <p>Most questions are about these topics.</p>
           </div>
 
           <div className={styles.list}>
             <div className={styles.topicBlock}>
               <strong>Personal information</strong>
-              <p>Name, address, family, work, travel history, and key details from the N-400.</p>
+              <p>Name, address, family, work, and travel.</p>
             </div>
             <div className={styles.topicBlock}>
               <strong>Good moral character</strong>
-              <p>Questions about taxes, arrests, organizations, and past legal issues.</p>
+              <p>Questions about taxes, arrests, and legal issues.</p>
             </div>
             <div className={styles.topicBlock}>
               <strong>Oath of allegiance</strong>
-              <p>Whether she is willing to support the Constitution and complete the oath process.</p>
+              <p>Questions about the oath.</p>
             </div>
           </div>
         </section>
@@ -88,26 +88,27 @@ export default function InterviewGuide() {
 
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
-          <h3>How to practice at home</h3>
-          <p>Keep it conversational. The point is to make the format feel familiar.</p>
+          <h3>Easy plan</h3>
+          <p className={styles.translation}>Plan fácil</p>
+          <p>Practice a few questions at a time.</p>
         </div>
 
         <div className={styles.splitGrid}>
           <div className={styles.topicBlock}>
             <strong>Step 1</strong>
-            <p>Read one officer command out loud and have her respond physically or verbally.</p>
+            <p>Read one command out loud.</p>
           </div>
           <div className={styles.topicBlock}>
             <strong>Step 2</strong>
-            <p>Ask simple personal questions from the application and let her answer in her own words.</p>
+            <p>Ask one simple question.</p>
           </div>
           <div className={styles.topicBlock}>
             <strong>Step 3</strong>
-            <p>Repeat the hardest questions once more, then stop before it becomes tiring.</p>
+            <p>Repeat the hard question once more.</p>
           </div>
           <div className={styles.topicBlock}>
-            <strong>Important reminder</strong>
-            <p>She does not need perfect English. She needs to understand and respond clearly enough.</p>
+            <strong>Remember</strong>
+            <p>Simple English is okay.</p>
           </div>
         </div>
       </section>
