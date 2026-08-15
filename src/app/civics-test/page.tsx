@@ -5,7 +5,7 @@ import Link from "next/link";
 import { StudyCard } from "@/components/StudyCard";
 import { ProgressBar } from "@/components/ProgressBar";
 import styles from "./page.module.css";
-import civicsData from "../../../docs/uscis_100q_parsed.json";
+import civicsData from "@/data/civics-2025.json";
 
 interface Question {
   ID: number;
@@ -35,6 +35,7 @@ interface StudyStats {
     correct: number;
     incorrect: number;
     date: string;
+    format: "standard" | "65-20";
   } | null;
 }
 
@@ -43,6 +44,13 @@ type StudyFilter = "all" | "65-20" | "review";
 type TestStatus = "idle" | "in_progress" | "passed" | "failed";
 
 const ALL_QUESTIONS = civicsData as Question[];
+const STUDY_BATCH_SIZE = 10;
+const STANDARD_TEST_TOTAL = 20;
+const STANDARD_PASSING_SCORE = 12;
+const STANDARD_FAILING_SCORE = 9;
+const EXEMPTION_TEST_TOTAL = 10;
+const EXEMPTION_PASSING_SCORE = 6;
+const EXEMPTION_FAILING_SCORE = 5;
 
 const STORAGE_KEYS = {
   profile: "uscis-civics-profile",
@@ -51,11 +59,11 @@ const STORAGE_KEYS = {
 };
 
 const DEFAULT_PROFILE: CivicsProfile = {
-  stateName: "New York",
-  stateCapital: "Albany",
-  governor: "Kathy Hochul",
-  senatorOne: "Chuck Schumer",
-  senatorTwo: "Kirsten Gillibrand",
+  stateName: "",
+  stateCapital: "",
+  governor: "",
+  senatorOne: "",
+  senatorTwo: "",
   representative: "",
 };
 
@@ -68,15 +76,18 @@ const DEFAULT_STATS: StudyStats = {
   lastResult: null,
 };
 
-const CURRENT_FEDERAL_ANSWERS = {
-  president: "Donald J. Trump",
-  vicePresident: "JD Vance",
-  speakerOfHouse: "Mike Johnson",
-  presidentParty: "Republican",
-  supremeCourtJustices: "9",
-  chiefJustice: "John G. Roberts, Jr.",
-  verifiedDate: "August 11, 2026",
+const USCIS_2025_RULES = {
+  filingStartDate: "October 20, 2025",
+  verifiedDate: "August 15, 2026",
+  testUpdatesUrl: "https://www.uscis.gov/citizenship/testupdates",
 };
+
+type SavedQueue = {
+  order: number[];
+  cursor: number;
+};
+
+type SavedQueues = Partial<Record<Exclude<StudyFilter, "review">, SavedQueue>>;
 
 function mergeProfileWithDefaults(saved: Partial<CivicsProfile>) {
   return {
@@ -89,13 +100,6 @@ function mergeProfileWithDefaults(saved: Partial<CivicsProfile>) {
   };
 }
 
-type SavedQueue = {
-  order: number[];
-  cursor: number;
-};
-
-type SavedQueues = Partial<Record<Exclude<StudyFilter, "review">, SavedQueue>>;
-
 function shuffleArray<T>(items: T[]) {
   return [...items].sort(() => 0.5 - Math.random());
 }
@@ -106,26 +110,14 @@ function uniqueIds(ids: number[]) {
 
 function resolveDynamicAnswers(question: Question, profile: CivicsProfile) {
   switch (question.ID) {
-    case 20:
-      return [profile.senatorOne, profile.senatorTwo].filter(Boolean);
     case 23:
-      return profile.representative ? [profile.representative] : [];
-    case 28:
-      return [CURRENT_FEDERAL_ANSWERS.president, "Trump"];
+      return [profile.senatorOne, profile.senatorTwo].filter(Boolean);
     case 29:
-      return [CURRENT_FEDERAL_ANSWERS.vicePresident, "J.D. Vance"];
-    case 39:
-      return [CURRENT_FEDERAL_ANSWERS.supremeCourtJustices, "nine"];
-    case 40:
-      return [CURRENT_FEDERAL_ANSWERS.chiefJustice, "Chief Justice John Roberts"];
-    case 43:
-      return [profile.governor];
-    case 44:
-      return [profile.stateCapital];
-    case 46:
-      return [CURRENT_FEDERAL_ANSWERS.presidentParty];
-    case 47:
-      return [CURRENT_FEDERAL_ANSWERS.speakerOfHouse];
+      return profile.representative ? [profile.representative] : [];
+    case 61:
+      return profile.governor ? [profile.governor] : [];
+    case 62:
+      return profile.stateCapital ? [profile.stateCapital] : [];
     default:
       return question.Accepted_Answers;
   }
@@ -147,6 +139,20 @@ function getPoolByFilter(filter: StudyFilter, hardQuestionIds: number[]) {
   }
 }
 
+function getTestSettings(useExemption: boolean) {
+  return useExemption
+    ? {
+        totalQuestions: EXEMPTION_TEST_TOTAL,
+        passingScore: EXEMPTION_PASSING_SCORE,
+        failingScore: EXEMPTION_FAILING_SCORE,
+      }
+    : {
+        totalQuestions: STANDARD_TEST_TOTAL,
+        passingScore: STANDARD_PASSING_SCORE,
+        failingScore: STANDARD_FAILING_SCORE,
+      };
+}
+
 export default function CivicsTest() {
   const [profile, setProfile] = useState<CivicsProfile>(DEFAULT_PROFILE);
   const [stats, setStats] = useState<StudyStats>(DEFAULT_STATS);
@@ -163,6 +169,8 @@ export default function CivicsTest() {
   const [isFlipped, setIsFlipped] = useState(false);
   const [testUseExemption, setTestUseExemption] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const testSettings = useMemo(() => getTestSettings(testUseExemption), [testUseExemption]);
 
   useEffect(() => {
     try {
@@ -221,7 +229,7 @@ export default function CivicsTest() {
     }
 
     if (studyFilter === "review") {
-      setStudyQuestions(shuffleArray(pool).slice(0, 10));
+      setStudyQuestions(shuffleArray(pool).slice(0, STUDY_BATCH_SIZE));
       setStudyIndex(0);
       setIsFlipped(false);
       return;
@@ -243,7 +251,7 @@ export default function CivicsTest() {
       cursor = 0;
     }
 
-    const batchIds = order.slice(cursor, cursor + 10);
+    const batchIds = order.slice(cursor, cursor + STUDY_BATCH_SIZE);
     const batch = batchIds
       .map((id) => pool.find((question) => question.ID === id))
       .filter((question): question is Question => Boolean(question));
@@ -269,6 +277,7 @@ export default function CivicsTest() {
   const currentStudyQuestion = studyQuestions[studyIndex];
   const currentTestQuestion = testQuestions[testIndex];
   const lastCardInSet = studyIndex === studyQuestions.length - 1;
+  const stateSummary = profile.stateName || "Add your state";
 
   const markNeedsReview = (questionId: number, shouldKeep: boolean) => {
     setStats((prev) => ({
@@ -284,7 +293,7 @@ export default function CivicsTest() {
       ? ALL_QUESTIONS.filter((question) => question.Is_65_20)
       : ALL_QUESTIONS;
 
-    setTestQuestions(shuffleArray(pool).slice(0, 10));
+    setTestQuestions(shuffleArray(pool).slice(0, testSettings.totalQuestions));
     setTestIndex(0);
     setScore(0);
     setIncorrect(0);
@@ -308,7 +317,8 @@ export default function CivicsTest() {
         status: passed ? "passed" : "failed",
         correct: nextScore,
         incorrect: nextIncorrect,
-        date: CURRENT_FEDERAL_ANSWERS.verifiedDate,
+        date: USCIS_2025_RULES.verifiedDate,
+        format: testUseExemption ? "65-20" : "standard",
       },
     }));
   };
@@ -327,12 +337,12 @@ export default function CivicsTest() {
     setScore(nextScore);
     setIncorrect(nextIncorrect);
 
-    if (nextScore >= 6) {
+    if (nextScore >= testSettings.passingScore) {
       completeTest(true, nextScore, nextIncorrect);
       return;
     }
 
-    if (nextIncorrect >= 5 || testIndex >= 9) {
+    if (nextIncorrect >= testSettings.failingScore || testIndex >= testSettings.totalQuestions - 1) {
       completeTest(false, nextScore, nextIncorrect);
       return;
     }
@@ -352,9 +362,14 @@ export default function CivicsTest() {
 
       {question.Dynamic_Answer && (
         <div className={styles.dynamicBox}>
-          <p className={styles.dynamicWarning}>Current answers checked on {CURRENT_FEDERAL_ANSWERS.verifiedDate}.</p>
-          {question.ID === 23 && !profile.representative && (
-            <p className={styles.dynamicHint}>Add the U.S. Representative if you want this answer filled in.</p>
+          <p className={styles.dynamicWarning}>
+            Current 2025 test rules checked on {USCIS_2025_RULES.verifiedDate}.
+          </p>
+          {[23, 29, 61, 62].includes(question.ID) && (
+            <p className={styles.dynamicHint}>Fill in your own state details below if you want this answer shown here.</p>
+          )}
+          {[30, 38, 39, 57].includes(question.ID) && (
+            <p className={styles.dynamicHint}>Use the USCIS updates link below for the current federal officeholder.</p>
           )}
         </div>
       )}
@@ -365,24 +380,24 @@ export default function CivicsTest() {
     <div className={styles.page}>
       <section className={styles.heroCard}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>Civics</span>
-          <h2>Civics questions</h2>
-          <p className={styles.translation}>Preguntas de civismo</p>
-          <p>Study 10 at a time. Tap the card to see the answer.</p>
+          <span className={styles.eyebrow}>2025 civics test</span>
+          <h2>Study the 2025 USCIS civics questions.</h2>
+          <p className={styles.translation}>Estudie las preguntas de civismo de 2025.</p>
+          <p>Use this section for the 2025 test only. It applies to N-400 filings on or after {USCIS_2025_RULES.filingStartDate}.</p>
         </div>
 
         <div className={styles.summaryGrid}>
           <div className={styles.summaryCard}>
             <strong>State</strong>
-            <span>New York</span>
+            <span>{stateSummary}</span>
           </div>
           <div className={styles.summaryCard}>
             <strong>Study set</strong>
-            <span>{studyFilter === "65-20" ? "65/20" : studyFilter === "review" ? "Review" : "All 100"}</span>
+            <span>{studyFilter === "65-20" ? "65/20" : studyFilter === "review" ? "Review" : "All 128"}</span>
           </div>
           <div className={styles.summaryCard}>
-            <strong>Tests passed</strong>
-            <span>{stats.testsPassed}</span>
+            <strong>Test format</strong>
+            <span>{testUseExemption ? "10 questions" : "20 questions"}</span>
           </div>
           <div className={styles.summaryCard}>
             <strong>Need review</strong>
@@ -422,21 +437,17 @@ export default function CivicsTest() {
       <section className={styles.profilePanel}>
         <div className={styles.profileHeader}>
           <div>
-            <span className={styles.eyebrow}>New York answers</span>
-            <h3>New York is filled in by default.</h3>
-            <p className={styles.translation}>Nueva York está listo por defecto.</p>
-            <p>Change it only if needed.</p>
+            <span className={styles.eyebrow}>Location-based answers</span>
+            <h3>Add your state details if you need them.</h3>
+            <p className={styles.translation}>Agregue los datos de su estado si los necesita.</p>
+            <p>These fields help with the 2025 questions that depend on where you live.</p>
           </div>
           <div className={styles.linkGroup}>
-            <a href="https://www.uscis.gov/citizenship/testupdates" target="_blank" rel="noreferrer">
-              USCIS updates
+            <a href="https://www.uscis.gov/citizenship-resource-center/naturalization-test-and-study-resources/2025-civics-test" target="_blank" rel="noreferrer">
+              2025 USCIS test
             </a>
-            <a
-              href="https://www.house.gov/representatives/find-your-representative"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Find representative
+            <a href={USCIS_2025_RULES.testUpdatesUrl} target="_blank" rel="noreferrer">
+              USCIS updates
             </a>
           </div>
         </div>
@@ -446,6 +457,7 @@ export default function CivicsTest() {
             <span>State</span>
             <input
               value={profile.stateName}
+              placeholder="Example: New York"
               onChange={(event) => setProfile((prev) => ({ ...prev, stateName: event.target.value }))}
             />
           </label>
@@ -453,6 +465,7 @@ export default function CivicsTest() {
             <span>Capital</span>
             <input
               value={profile.stateCapital}
+              placeholder="Example: Albany"
               onChange={(event) => setProfile((prev) => ({ ...prev, stateCapital: event.target.value }))}
             />
           </label>
@@ -460,6 +473,7 @@ export default function CivicsTest() {
             <span>Governor</span>
             <input
               value={profile.governor}
+              placeholder="Your current governor"
               onChange={(event) => setProfile((prev) => ({ ...prev, governor: event.target.value }))}
             />
           </label>
@@ -467,6 +481,7 @@ export default function CivicsTest() {
             <span>Senator 1</span>
             <input
               value={profile.senatorOne}
+              placeholder="One current U.S. senator"
               onChange={(event) => setProfile((prev) => ({ ...prev, senatorOne: event.target.value }))}
             />
           </label>
@@ -474,6 +489,7 @@ export default function CivicsTest() {
             <span>Senator 2</span>
             <input
               value={profile.senatorTwo}
+              placeholder="Second current U.S. senator"
               onChange={(event) => setProfile((prev) => ({ ...prev, senatorTwo: event.target.value }))}
             />
           </label>
@@ -481,10 +497,8 @@ export default function CivicsTest() {
             <span>Representative</span>
             <input
               value={profile.representative}
-              placeholder="Optional"
-              onChange={(event) =>
-                setProfile((prev) => ({ ...prev, representative: event.target.value }))
-              }
+              placeholder="Your current U.S. representative"
+              onChange={(event) => setProfile((prev) => ({ ...prev, representative: event.target.value }))}
             />
           </label>
         </div>
@@ -495,8 +509,8 @@ export default function CivicsTest() {
           <div className={styles.panelHeader}>
             <div>
               <span className={styles.eyebrow}>Study mode</span>
-              <h3>10 questions at a time</h3>
-              <p className={styles.translation}>10 preguntas por vez</p>
+              <h3>{STUDY_BATCH_SIZE} questions at a time</h3>
+              <p className={styles.translation}>{STUDY_BATCH_SIZE} preguntas por vez</p>
             </div>
 
             <div className={styles.controlGroup}>
@@ -506,7 +520,7 @@ export default function CivicsTest() {
                   value={studyFilter}
                   onChange={(event) => setStudyFilter(event.target.value as StudyFilter)}
                 >
-                  <option value="all">All 100</option>
+                  <option value="all">All 128</option>
                   <option value="65-20">65/20</option>
                   <option value="review">Review list</option>
                 </select>
@@ -569,7 +583,7 @@ export default function CivicsTest() {
                   className={styles.ghostButton}
                   onClick={() => loadNextStudySet(false)}
                 >
-                  Next 10
+                  Next {STUDY_BATCH_SIZE}
                 </button>
               </div>
 
@@ -610,9 +624,13 @@ export default function CivicsTest() {
           <div className={styles.panelHeader}>
             <div>
               <span className={styles.eyebrow}>Test mode</span>
-              <h3>Practice the real format</h3>
-              <p className={styles.translation}>Practique el formato real</p>
-              <p>10 questions. Pass with 6 correct.</p>
+              <h3>Practice the 2025 format</h3>
+              <p className={styles.translation}>Practique el formato de 2025</p>
+              <p>
+                {testUseExemption
+                  ? "10 questions. Pass with 6 correct."
+                  : "Up to 20 questions. Pass with 12 correct."}
+              </p>
             </div>
           </div>
 
@@ -623,7 +641,7 @@ export default function CivicsTest() {
                 checked={testUseExemption}
                 onChange={(event) => setTestUseExemption(event.target.checked)}
               />
-              <span>Use the 65/20 question set</span>
+              <span>Use the 65/20 special consideration set</span>
             </label>
 
             <div className={styles.heroActions}>
@@ -637,7 +655,7 @@ export default function CivicsTest() {
             <div className={styles.lastResult}>
               <strong>Last result</strong>
               <span>
-                {stats.lastResult.status === "passed" ? "Passed" : "Not passed"} — {stats.lastResult.correct} correct, {stats.lastResult.incorrect} wrong.
+                {stats.lastResult.status === "passed" ? "Passed" : "Not passed"} - {stats.lastResult.correct} correct, {stats.lastResult.incorrect} wrong.
               </span>
             </div>
           )}
@@ -664,7 +682,7 @@ export default function CivicsTest() {
             </button>
           </div>
 
-          <ProgressBar current={testIndex + 1} total={10} />
+          <ProgressBar current={testIndex + 1} total={testSettings.totalQuestions} />
 
           <div className={styles.scoreBoard}>
             <span className={styles.correct}>Correct: {score}</span>

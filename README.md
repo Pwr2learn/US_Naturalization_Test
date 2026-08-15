@@ -3,7 +3,7 @@
 A Next.js application designed to help users prepare for the United States Naturalization Test.
 
 ## Features
-- **Civics Test**: Practice the 100 civics questions with an interactive study mode.
+- **Civics Test**: Practice the 128 civics questions from the 2025 Naturalization Civics Test with an interactive study mode.
 - **Reading & Writing**: Prepare for the English reading and writing portion of the test.
 - **Interview**: Simulate the naturalization interview experience.
 

@@ -9,7 +9,7 @@ export default function Home() {
           <span className={styles.eyebrow}>Start here</span>
           <h1>Practice for the citizenship test.</h1>
           <p className={styles.translation}>Practique para el examen de ciudadanía.</p>
-          <p>Pick one part. Study a little at a time. Keep it simple.</p>
+          <p>Use the 2025 civics test if your N-400 was filed on or after October 20, 2025. Study a little at a time.</p>
 
           <div className={styles.heroActions}>
             <Link href="/civics-test" className="button-primary">
@@ -64,7 +64,7 @@ export default function Home() {
           <article className={styles.valueCard}>
             <h3>Civics</h3>
             <p className={styles.translation}>Educación cívica</p>
-            <p>Answer the civics questions.</p>
+            <p>Practice the 2025 civics questions.</p>
           </article>
 
           <article className={styles.valueCard}>
@@ -91,9 +91,9 @@ export default function Home() {
         <div className={styles.grid}>
           <Link href="/civics-test" className={styles.card}>
             <span className={styles.cardTag}>Civics</span>
-            <h3>Civics questions</h3>
+            <h3>2025 civics questions</h3>
             <p className={styles.translation}>Preguntas de civismo</p>
-            <p>Study 10 questions at a time.</p>
+            <p>Study the 128-question 2025 civics bank.</p>
             <span className={styles.cardLink}>Open civics</span>
           </Link>
 

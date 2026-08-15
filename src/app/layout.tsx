@@ -46,7 +46,7 @@ export default function RootLayout({
           <footer className="app-footer">
             <div className="app-footer__inner">
               <p>Simple practice for the USCIS test.</p>
-              <p className="app-footer__note">Content follows the 2008 USCIS naturalization test format.</p>
+              <p className="app-footer__note">Civics content follows the 2025 USCIS naturalization civics test.</p>
             </div>
           </footer>
         </div>
